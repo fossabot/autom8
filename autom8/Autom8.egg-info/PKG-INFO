@@ -1,0 +1,13 @@
+Metadata-Version: 1.1
+Name: Autom8
+Version: 0.0.1
+Summary: A basic framework for Python Busines Process Automation (RPA)
+Home-page: https://github.com/dkatz23238/autom8
+Author: David Katz
+Author-email: author@example.com
+License: UNKNOWN
+Description:  
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 2.7.14
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: Windows
