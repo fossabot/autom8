@@ -1,26 +1,24 @@
 from time import sleep
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-from pandas import read_excel, pivot_table, isnull, DataFrame, read_html, ExcelWriter
-from ctypes import windll
+from pandas import read_excel, DataFrame, read_html, ExcelWriter
 from selenium.webdriver.support.ui import Select
 import xlwings as xw
 from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.support.ui import Select
-import re
+import easygui
 import pyautogui
 import os
 import pandas as pd
-import xlwings as xw
 import shutil
-import os
+import uuid
 from requests import get
 from zipfile import ZipFile
-import easygui
 from dateutil import parser
 import glob
 
+# Gchrome and chrome dirver dependancy. Chrome driver will not work unless regular chrome is installed on machineself.
 didnotinit = "Use .initialize_driver() to instantiate a webdriver session. "
+log_file_message = "Create and initialize logfile using .create_log_file(bot_name) before logging"
 
 class my_RPA(object):
 
@@ -30,6 +28,7 @@ class my_RPA(object):
             print("No DatFrame Provided")
         else:
             self.DataFrame = df
+
         driver_path = r"C:\chromedriver_win32\chromedriver.exe"
         chop = webdriver.ChromeOptions()
         user = os.environ.get('USERNAME')
@@ -43,6 +42,43 @@ class my_RPA(object):
         self.chop = chop
         self.driver_path = driver_path
         self.driver =  None
+        self.uid = str(uuid.uuid4().hex)
+        self.logfile_path = None
+
+    def create_log_file(self, bot_name=None):
+        usr =  os.environ["USERNAME"]
+        log_path = "c:\\Users\\%s\\autom8_logs"%usr
+        exists = os.path.exists(log_path)
+
+        if exists == True:
+            print("log directory already created")
+        else:
+            glob.os.mkdir(log_path)
+            print("log directory created: %s" %log_path)
+
+        if bot_name == None:
+            uid = self.uid
+            bot_name = "Unnamed Bot - %s" %str(uid)
+            print("Bot Named: Unnamed Bot - %s"%uid )
+
+        else:
+            uid = self.uid
+            bot_name = "%s - %s" %(bot_name,str(uid))
+            print("Bot Named: Unnamed Bot - %s"%uid )
+
+        logfile = os.path.join(log_path, bot_name+".txt")
+        file = open(logfile, mode="w")
+        file.write("log file created at %s by user %s.\n"%(str(datetime.datetime.now()), usr))
+        file.write("--- --- --- --- --- --- ---\n")
+        self.logfile_path = logfile
+        today_str = datetime.datetime.today().strftime("%d.%b.%Y")
+
+    def log(self, message):
+        if self.logfile_path == None:
+            print(log_file_message)
+        else:
+            with open(self.logfile_path, 'a') as outfile:
+                outfile.write("%s - %s\n"%(message, str(datetime.datetime.now())))
 
     def set_DataFrame(df):
         self.DataFrame = df
