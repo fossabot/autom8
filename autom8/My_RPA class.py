@@ -70,5 +70,3 @@ class my_RPA(object):
             print(didnotinit)
         else:
             return self.driver.execute_script(script)
-
-my_robot = my_RPA()
