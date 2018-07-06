@@ -16,26 +16,30 @@ from zipfile import ZipFile
 from dateutil import parser
 import glob
 
+
 # Gchrome and chrome dirver dependancy. Chrome driver will not work unless regular chrome is installed on machineself.
 didnotinit = "Use .initialize_driver() to instantiate a webdriver session. "
 log_file_message = "Create and initialize logfile using .create_log_file(bot_name) before logging"
 
 class my_RPA(object):
 
-    def __init__(self, df=None):
+    def __init__(self,downloads_directory, df=None):
 
         if df == None:
             print("No DatFrame Provided")
         else:
             self.DataFrame = df
 
+        self.downloads_dir = r"C:\Users\david.emmanuel.katz\Downloads\%s"%downloads_directory
         driver_path = r"C:\chromedriver_win32\chromedriver.exe"
         chop = webdriver.ChromeOptions()
         user = os.environ.get('USERNAME')
+        chop.add_extension('C:\chromedriver_win32\Disable-Download-Bar_v1.5.crx')
+        chop.add_argument('log-level=3')
         chop.add_argument(r"user-data-dir=C:\Users\\"+user+r"\AppData\Local\Google\Chrome\User Data\Profile 2") #Path to your chrome profile
         chop.add_argument("--start-maximized")
         chop.add_experimental_option("prefs", {
-      	"download.default_directory": r"C:\CIT RPA\Reports",
+      	"download.default_directory": self.downloads_dir,
      	"download.prompt_for_download": False,
       	"download.directory_upgrade": True,
       	"safebrowsing.enabled": True})
@@ -80,7 +84,7 @@ class my_RPA(object):
             with open(self.logfile_path, 'a') as outfile:
                 outfile.write("%s - %s\n"%(message, str(datetime.datetime.now())))
 
-    def set_DataFrame(df):
+    def set_DataFrame(self, df):
         self.DataFrame = df
 
     def initialize_driver(self):

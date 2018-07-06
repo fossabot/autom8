@@ -1,6 +1,0 @@
-README.md
-setup.py
-Autom8.egg-info/PKG-INFO
-Autom8.egg-info/SOURCES.txt
-Autom8.egg-info/dependency_links.txt
-Autom8.egg-info/top_level.txt
