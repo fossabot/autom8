@@ -7,13 +7,38 @@ import glob
 import platform
 import datetime
 import uuid
-# Gchrome and chrome dirver dependancy. Chrome driver will not work unless regular chrome is installed on machineself.
+
 didnotinit = "Use .initialize_driver() to instantiate a webdriver session. "
 log_file_message = "Create and initialize logfile using .create_log_file(bot_name) before logging"
 
 class my_RPA(object):
 
+    """
+    Creates an instance of RPA object:
+
+    RPA objects can be used to create a virtual
+    assistant that will cary out a series of event-based
+    or stricly scheduled taks.
+
+    Use:
+
+    human_resources_bot = my_RPA("Human Resources Bot")
+    human_resources_bot.create_log_file()
+    human_resources_bot.initialize_driver()
+    human_resources_bot.log("WebDriver Initiated")
+
+                    ... ... ...
+
+    Keyword arguments:
+
+    downloads_directory = Directory within downloads
+    folder that the RPA's chromedriver will download too.
+    Usefull to identify all files downloaded by specific RPA bot.
+
+    """
+
     def __init__(self,downloads_directory, df=None):
+
         if df is None:
             print("No DatFrame Provided")
         else:
@@ -32,6 +57,7 @@ class my_RPA(object):
         chop = webdriver.ChromeOptions()
         user = os.environ.get('USERNAME')
         chop.add_argument('log-level=3')
+        chop.add_argument('--start-maximized')
 
         if platform.system() == "Windows":
             chop.add_argument(r"user-data-dir=C:\Users\\"+user+r"\AppData\Local\Google\Chrome\User Data\Profile 2") #Path to your chrome profile
@@ -44,6 +70,7 @@ class my_RPA(object):
      	"download.prompt_for_download": False,
       	"download.directory_upgrade": True,
       	"safebrowsing.enabled": True})
+
         self.chop = chop
         self.driver_path = driver_path
         self.driver = None
@@ -51,6 +78,9 @@ class my_RPA(object):
         self.logfile_path = None
 
     def create_log_file(self, bot_name=None):
+
+        """ create log file in autom8_logs folder.
+            if bot_name=None automatic ID is assigned to bot. """
         try:
             usr =  os.environ["USERNAME"]
         except:
@@ -72,14 +102,16 @@ class my_RPA(object):
 
         if bot_name is None:
             uid = self.uid
-            bot_name = "Unnamed Bot - %s" %str(uid)
-            print("Bot Named: Unnamed Bot - %s"%uid )
+            bot_name = "Unnamed Bot - %s - %s" %(str(uid), str(datetime.datetime.now()))
+            print("Bot Named: Unnamed Bot - %s - %s"%(str(uid), str(datetime.datetime.now())))
         else:
             uid = self.uid
-            bot_name = "%s - %s" %(bot_name,str(uid))
-            print("Bot Named: Unnamed Bot - %s"%uid )
+            bot_name = "%s - %s - %s" %(bot_name,str(uid), str(datetime.datetime.now()))
+            print("%s - %s - %s"%(bot_name, str(uid), str(datetime.datetime.now())))
 
         logfile = os.path.join(self.log_path, bot_name+".txt")
+
+
         file = open(logfile, mode="w")
         file.write("log file created at %s by user %s.\n"%(str(datetime.datetime.now()), usr))
         file.write("--- --- --- --- --- --- ---\n")
@@ -87,6 +119,8 @@ class my_RPA(object):
         today_str = datetime.datetime.today().strftime("%d.%b.%Y")
 
     def log(self, message):
+        """ """
+
         if self.logfile_path is None:
             print(log_file_message)
         else:
@@ -105,7 +139,7 @@ class my_RPA(object):
         else:
             self.driver.get(url)
 
-    def robust_get_element(self, element, try_times, seconds):
+    def wait_and_find_element_xpath(self, element, try_times, seconds):
         for i in range(try_times):
             try:
                 my_element = self.driver.find_element_by_xpath(element)
@@ -118,3 +152,12 @@ class my_RPA(object):
             print(didnotinit)
         else:
             return self.driver.execute_script(script)
+
+    def find_by_tag_and_attr(self, tag, attribute, evaluation_string, sleep_secs):
+        sleep(sleep_secs)
+        elements = self.driver.find_elements_by_tag_name(tag)
+        elements_to_return = []
+        for el in elements:
+            if el.get_attribute(attribute) == evaluation_string:
+                elements_to_return.append(el)
+        return elements_to_return
