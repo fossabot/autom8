@@ -1,6 +1,6 @@
 from autom8 import *
 
-def wipe(mybot):
+def wipe(my_bot):
     my_bot.driver.quit()
 
 #defines standard pattern to optain summarized stock data
@@ -88,7 +88,7 @@ def main():
         all_data = get_ticker_data(my_bot=my_bot, tickers=tickers)
         df = DataFrame(all_data).set_index("ticker")
         df.to_csv(my_bot.downloads_dir)
-        wipe(mybot)
+        wipe(my_bot)
     except Exception as e:
         #catch any exception and log it
         my_bot.log("Error:")
