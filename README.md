@@ -7,8 +7,7 @@ throughout any corporation of any size.
 
 Download the autom8 folder and import the my_RPA class into any python script.
 
-
-### Prerequisites
+## Prerequisites
 
 Prerequisites:
 1. Have Google Chrome Installed
@@ -27,7 +26,7 @@ Prerequisites:
 from autom8 import *
 ```
 
-### Quick Start
+## Quick Start
 
 To create an instance of an active RPA we must instantiate the my_RPA class like in the example provided below.
 
@@ -38,7 +37,7 @@ human_resources_bot.initialize_driver()
 human_resources_bot.log("WebDriver Initiated")
 ```
 
-### Documenation
+## Documenation
 
 Docs coming soon. Stay tuned or sign up for our mailing list *here*
 
