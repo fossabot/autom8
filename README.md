@@ -27,7 +27,7 @@ Prerequisites:
 from autom8 import *
 ```
 
-### Usage
+### Quick Start
 
 To create an instance of an active RPA we must instantiate the my_RPA class like in the example provided below.
 
@@ -37,6 +37,10 @@ human_resources_bot.create_log_file()
 human_resources_bot.initialize_driver()
 human_resources_bot.log("WebDriver Initiated")
 ```
+
+### Documenation
+
+Docs coming soon. Stay tuned or sign up for our mailing list *here*
 
 ## License
 
