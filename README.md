@@ -19,10 +19,11 @@ Prerequisites:
   - platform
   - uuid
 
-
+3. Import the my_RPA class with the following code:
 
 ```
-Give examples
+from autom8 import *
+
 ```
 
 ### Usage
