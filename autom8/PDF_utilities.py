@@ -44,7 +44,6 @@ class pdf_form_handler(object):
 
         return retval
     @staticmethod
-
     def get_form_fields(infile):
         infile = PdfFileReader(open(infile, 'rb'))
         fields = _getFields(infile)
@@ -71,10 +70,3 @@ class pdf_form_handler(object):
 
         with open(outfile, 'wb') as out:
             writer.write(out)
-
-
-
-#my_pdf = "/Users/davidkatzaudio/autom8/autom8/standard_form.pdf"
-
-#form_fieds = handler.get_form_fields(my_pdf)
-#handler.update_form_values(my_pdf, "out.pdf", {'headerCity[0]': 'NEW YORK CITY BITCH !!!!'})
