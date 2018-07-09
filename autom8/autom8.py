@@ -1,6 +1,7 @@
 from time import sleep
 from selenium import webdriver
 from pandas import DataFrame
+from PDF_utilities import pdf_form_handler
 from selenium.webdriver.chrome.options import Options
 import os
 import glob
@@ -37,7 +38,9 @@ class my_RPA(object):
 
     """
 
-    def __init__(self,downloads_directory, df=None):
+    def __init__(self,bot_name,downloads_directory, df=None):
+
+        self.bot_name = bot_name
 
         if df is None:
             print("No DatFrame Provided")
@@ -69,7 +72,8 @@ class my_RPA(object):
       	"download.default_directory": self.downloads_dir,
      	"download.prompt_for_download": False,
       	"download.directory_upgrade": True,
-      	"safebrowsing.enabled": True})
+      	"safebrowsing.enabled": True,
+        "plugins.plugins_disabled": "Chrome PDF Viewer"})
 
         self.chop = chop
         self.driver_path = driver_path
@@ -77,7 +81,11 @@ class my_RPA(object):
         self.uid = str(uuid.uuid4().hex)
         self.logfile_path = None
 
-    def create_log_file(self, bot_name=None):
+        self.pdf_form_handler = pdf_form_handler()
+
+    def create_log_file(self):
+
+        bot_name= self.bot_name
 
         """ create log file in autom8_logs folder.
             if bot_name=None automatic ID is assigned to bot. """
@@ -102,12 +110,12 @@ class my_RPA(object):
 
         if bot_name is None:
             uid = self.uid
-            bot_name = "Unnamed Bot - %s - %s" %(str(uid), str(datetime.datetime.now()))
-            print("Bot Named: Unnamed Bot - %s - %s"%(str(uid), str(datetime.datetime.now())))
+            bot_name = "Unnamed Bot - %s - %s" %(str(uid), str(datetime.datetime.now().strftime("%b %Y")))
+            print("Bot Named: Unnamed Bot - %s - %s"%(str(uid), str(datetime.datetime.now().strftime("%b %Y"))))
         else:
             uid = self.uid
-            bot_name = "%s - %s - %s" %(bot_name,str(uid), str(datetime.datetime.now()))
-            print("%s - %s - %s"%(bot_name, str(uid), str(datetime.datetime.now())))
+            bot_name = "%s - %s - %s" %(bot_name,str(uid), str(datetime.datetime.now().strftime("%b %Y")))
+            print("%s - %s - %s"%(bot_name, str(uid), str(datetime.datetime.now().strftime("%b %Y"))))
 
         logfile = os.path.join(self.log_path, bot_name+".txt")
 

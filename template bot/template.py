@@ -1,14 +1,18 @@
 from autom8 import *
 
 def wipe(my_bot):
+
     my_bot.driver.quit()
 
 def primary_child_function(my_bot):
+
     """ do some stuff """
+
     pass
 
 #main function will handle our RPA process
 def main():
+
     #define folder name within downloads
     ddir_foldr_name = "autom8_files"
     #give your bot name
@@ -17,7 +21,6 @@ def main():
     my_bot = my_RPA(downloads_directory=ddir_foldr_name)
     #create a log file
     my_bot.create_log_file(bot_name=bot_name)
-
     #initialize the webdriver
     my_bot.initialize_driver()
     #get url
@@ -33,8 +36,11 @@ def main():
 
 #handle exceptions
 try:
+
     main()
+
 except Exception as e:
+    
     print(e)
     #catch any exception and log it
     my_bot.log("Error:")
