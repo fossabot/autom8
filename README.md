@@ -1,7 +1,6 @@
 # autom8: Business Process Automation Platform
 
-autom8 is a python based Robotic Process Automation platform for developing and deploying RPA's at scale
-throughout any corporation of any size.
+autom8 is a Python library developed in Python 3 to facilitate and enhance the creation of RPA, mini_bot scripts, and other applied intelligence applications. 
 
 ## Getting Started
 
