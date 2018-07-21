@@ -1,13 +1,13 @@
 from time import sleep
 from selenium import webdriver
 from pandas import DataFrame
-from PDF_utilities import pdf_form_handler
 from selenium.webdriver.chrome.options import Options
 import os
 import glob
 import platform
 import datetime
 import uuid
+import pymongo
 
 didnotinit = "Use .initialize_driver() to instantiate a webdriver session. "
 log_file_message = "Create and initialize logfile using .create_log_file(bot_name) before logging"
@@ -81,7 +81,7 @@ class my_RPA(object):
         self.uid = str(uuid.uuid4().hex)
         self.logfile_path = None
 
-        self.pdf_form_handler = pdf_form_handler()
+        self.pdf_form_handler = pdf_form_handler
 
     def create_log_file(self):
 
@@ -169,3 +169,9 @@ class my_RPA(object):
             if el.get_attribute(attribute) == evaluation_string:
                 elements_to_return.append(el)
         return elements_to_return
+
+class DataBase(object):
+    def __init__ (self, db_name, collection_name):
+        self.client = pymongo.MongoClient("mongodb://localhost:27017") # defaults to port 27017
+        self.ambito_db = self.client[db_name]
+        self.collection = self.ambito_db[collection_name]

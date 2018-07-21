@@ -18,9 +18,9 @@ def main():
     #give your bot name
     bot_name = "skynet"
     #instantiate your bot
-    my_bot = my_RPA(downloads_directory=ddir_foldr_name)
+    my_bot = my_RPA(bot_name=bot_name, downloads_directory=ddir_foldr_name)
     #create a log file
-    my_bot.create_log_file(bot_name=bot_name)
+    my_bot.create_log_file()
     #initialize the webdriver
     my_bot.initialize_driver()
     #get url
@@ -40,7 +40,7 @@ try:
     main()
 
 except Exception as e:
-    
+
     print(e)
     #catch any exception and log it
     my_bot.log("Error:")
