@@ -81,8 +81,6 @@ class my_RPA(object):
         self.uid = str(uuid.uuid4().hex)
         self.logfile_path = None
 
-        self.pdf_form_handler = pdf_form_handler
-
     def create_log_file(self):
 
         bot_name= self.bot_name
