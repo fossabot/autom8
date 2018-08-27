@@ -43,7 +43,11 @@ human_resources_bot.initialize_driver()
 human_resources_bot.log("WebDriver Initiated")
 ```
 
-A common issue in process automation is being able to efficiently identify specific elements within an html front end. Ideally this should be done with the least lines of code possible. This is why we have created the find_by_tag_and_attr method that iterates through every single element of a specific tag on a page and evaluates if any of the elements attributes matches the evaluation string provided then the selected element is returned.
+A common issue in process automation is being able to efficiently identify specific elements within an html front end.
+
+Ideally this should be done with the least lines of code possible.
+
+This is why we have created the find_by_tag_and_attr method that iterates through every single element of a specific tag on a page and evaluates if any of the elements attributes matches the evaluation string provided. Matched elements are returned in a list.
 ```
 my_robot = my_RPA(bot_name="my_robot", downloads_directory="my_robot_downloads_folder")
 my_robot.find_by_tag_and_attr(tag, attribute, evaluation_string, sleep_secs)
