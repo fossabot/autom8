@@ -7,10 +7,10 @@ Aimed at outperforming and outcosting closed sourced solutions such as Automatio
 The package's goal is to facilitate the RPA development process and bring Python into the Intelligent Automation and Robotic Process Automation industries.
 
 Some conveniences  provided are:
- - Robust methods to navigate business applications frontends oriented towards efficiently managing large scale Automation endeavors.
+ - Robust methods to navigate business applications frontends oriented towards efficiently managing large scale Automation endeavors
  - RPA logging locally hosted or integrated with google clouds Stackdriver
  - Integration with SAP scripting client
- - Documentation and examples to create robust enterprise grade RPAs using python.
+ - Documentation and examples to create robust enterprise grade RPAs using python
  - Integration with major platforms for task specific business automaions
 
 ## Getting Started
