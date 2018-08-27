@@ -1,0 +1,6 @@
+numpy
+selenium
+pandas
+glob
+platform
+uuid
