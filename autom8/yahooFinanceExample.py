@@ -26,8 +26,6 @@ for i in tickers:
     my_bot.get("https://finance.yahoo.com/quote/%s"%i)
     page_source = my_bot.driver.page_source
     mydf = read_html(page_source)[-1]
-    mydf.columns = ["Indicators", "Values"]
-    mydf = mydf.set_index("Indicators")
     mydf["REPORT_DATE"] = str(datetime.datetime.now())
     mydf.to_csv("C:\Users\%s\Desktop\Financial_YAHOO_BOT_Outputs/%s.csv"%(environ["USERNAME"], i))
     sleep(2)
