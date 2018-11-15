@@ -23,7 +23,7 @@ class my_RPA(object):
 
     Use:
 
-    human_resources_bot = my_RPA("Human Resources Bot")
+    human_resources_bot = my_RPA(bot_name="HR_bot", downloads_directory = "timesheets")
     human_resources_bot.create_log_file()
     human_resources_bot.initialize_driver()
     human_resources_bot.log("WebDriver Initiated")
@@ -38,14 +38,15 @@ class my_RPA(object):
 
     """
 
-    def __init__(self,bot_name,downloads_directory, df=None):
+    def __init__(self,bot_name,downloads_directory,df=None, chromeProfile=None):
 
         self.bot_name = bot_name
 
         if df is None:
-            print("No DatFrame Provided")
+            pass
         else:
             self.DataFrame = df
+            print("DataFrame Provided to RPA")
 
         if platform.system() == "Windows":
             user = os.environ["USERNAME"]
@@ -63,7 +64,10 @@ class my_RPA(object):
         chop.add_argument('--start-maximized')
 
         if platform.system() == "Windows":
-            chop.add_argument(r"user-data-dir=C:\Users\\"+user+r"\AppData\Local\Google\Chrome\User Data\Profile 2") #Path to your chrome profile
+            if chromeProfile == None:
+                chop.add_argument(r"user-data-dir=C:\Users\\"+user+r"\AppData\Local\Google\Chrome\User Data\Profile 1")
+            else:
+                 chop.add_argument(r"user-data-dir=C:\Users\\"+user+r"\AppData\Local\Google\Chrome\User Data\%s" %chromeProfile)
         elif platform.system() == "Darwin":
                     pass
 
@@ -74,6 +78,7 @@ class my_RPA(object):
       	"download.directory_upgrade": True,
       	"safebrowsing.enabled": True,
         "plugins.plugins_disabled": "Chrome PDF Viewer"})
+        #will allow direct downloads of pdf
 
         self.chop = chop
         self.driver_path = driver_path
@@ -94,13 +99,14 @@ class my_RPA(object):
 
 
         if platform.system() == "Windows":
+
             self.log_path = "c:\\Users\\%s\\autom8_logs"%usr
         else:
             self.log_path = "/Users/%s/autom8_logs"%usr
 
         exists = os.path.exists(self.log_path)
 
-        if exists == True:
+        if exists:
             print("log directory already created")
         else:
             glob.os.mkdir(self.log_path)
@@ -109,12 +115,12 @@ class my_RPA(object):
         if bot_name is None:
             uid = self.uid
             bot_name = "Unnamed Bot - %s - %s" %(str(uid), str(datetime.datetime.now().strftime("%b %Y")))
-            print("Bot Named: Unnamed Bot - %s - %s"%(str(uid), str(datetime.datetime.now().strftime("%b %Y"))))
+            print(bot_name)
         else:
             uid = self.uid
-            bot_name = "%s - %s - %s" %(bot_name,str(uid), str(datetime.datetime.now().strftime("%b %Y")))
-            print("%s - %s - %s"%(bot_name, str(uid), str(datetime.datetime.now().strftime("%b %Y"))))
-
+            bot_name = "%s - %s - %s" %(bot_name, str(uid), str(datetime.datetime.now().strftime("%b %Y")))
+            print(bot_name)
+        
         logfile = os.path.join(self.log_path, bot_name+".txt")
 
 
@@ -122,7 +128,6 @@ class my_RPA(object):
         file.write("log file created at %s by user %s.\n"%(str(datetime.datetime.now()), usr))
         file.write("--- --- --- --- --- --- ---\n")
         self.logfile_path = logfile
-        today_str = datetime.datetime.today().strftime("%d.%b.%Y")
 
     def log(self, message):
         """ """
@@ -145,13 +150,16 @@ class my_RPA(object):
         else:
             self.driver.get(url)
 
-    def wait_and_find_element_xpath(self, element, try_times, seconds):
-        for i in range(try_times):
-            try:
-                my_element = self.driver.find_element_by_xpath(element)
-                return my_element
-            except:
-                sleep(seconds)
+    def wait_and_find_element_css(self, element, try_times, seconds):
+        if self.driver is None:
+            print(didnotinit)
+        else:
+            for i in range(try_times):
+                try:
+                    my_element = self.driver.find_element_by_css_selector(element)
+                    return my_element
+                except:
+                    sleep(seconds)
 
     def use_javascript(self, script):
         if self.driver is None:
@@ -160,16 +168,16 @@ class my_RPA(object):
             return self.driver.execute_script(script)
 
     def find_by_tag_and_attr(self, tag, attribute, evaluation_string, sleep_secs):
-        sleep(sleep_secs)
-        elements = self.driver.find_elements_by_tag_name(tag)
-        elements_to_return = []
-        for el in elements:
-            if el.get_attribute(attribute) == evaluation_string:
-                elements_to_return.append(el)
-        return elements_to_return
+        if self.driver is None:
+            print(didnotinit)
+        else:
+            sleep(sleep_secs)
+            elements = self.driver.find_elements_by_tag_name(tag)
+            elements_to_return= [el for el in elements if el.get_attribute(attribute) == evaluation_string]
+            return elements_to_return
 
 class DataBase(object):
     def __init__ (self, db_name, collection_name):
         self.client = pymongo.MongoClient("mongodb://localhost:27017") # defaults to port 27017
-        self.ambito_db = self.client[db_name]
-        self.collection = self.ambito_db[collection_name]
+        self.db = self.client[db_name]
+        self.collection = self.db[collection_name]
