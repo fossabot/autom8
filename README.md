@@ -39,7 +39,7 @@ To create an instance of an active RPA we must instantiate the my_RPA class. The
 
 
 ```
-human_resources_bot = my_RPA(bot_name="HR_bot", downloads_directory = "timesheets")
+human_resources_bot = my_RPA(bot_name="HR_bot", downloads_directory="timesheets")
 human_resources_bot.create_log_file()
 human_resources_bot.initialize_driver()
 human_resources_bot.log("WebDriver Initiated"
