@@ -16,19 +16,19 @@ Some conveniences  provided are:
 ## Getting Started
 
 
- - 1) Install necessary packages by running the pip command with provided requirements.txt file:
+ 1) Install necessary packages by running the pip command with provided requirements.txt file:
 ```
 pip install -r requirements.txt
 ```
 
-- 2) Make sure Google Chrome is installed on the host machine. Be prepared to run the CheckCDriver function provided in the library in order to download the most recent chrome webdriver for process automation. Running the following code will download the latest chromedriver and customize extensions optimized for RPA development:
+2) Make sure Google Chrome is installed on the host machine. Be prepared to run the CheckCDriver function provided in the library in order to download the most recent chrome webdriver for process automation. Running the following code will download the latest chromedriver and customize extensions optimized for RPA development:
  ```
 from checkCDriver import checkCDriver
 # Checks if Google Chrome Driver is found on machine. Downloads if needed.
 checkCDriver()
 ```
 
-- 3) You are now ready to use the package. Import the my_RPA class with the following code:
+3) You are now ready to use the package. Import the my_RPA class with the following code:
 ```
 from autom8 import *
 ```
