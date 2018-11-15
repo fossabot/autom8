@@ -27,13 +27,8 @@ from checkCDriver import checkCDriver
 # Checks if Google Chrome Driver is found on machine. Downloads if needed.
 checkCDriver()
 ```
- - Run the CheckCDriver function to download the most recent ChromeDriver from Google.
-Import the my_RPA class with the following code:
 
-
-- Run the CheckCDriver function to download the most recent ChromeDriver from Google
-
-- Import the my_RPA class with the following code:
+- You are now ready to use the package. Import the my_RPA class with the following code:
 ```
 from autom8 import *
 ```
