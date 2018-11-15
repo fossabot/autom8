@@ -18,7 +18,7 @@ Some conveniences  provided are:
  - Make sure Google Chrome is installed on the host machine. Be prepared to run the CheckCDriver function provided in the library in order to download the most recent chrome webdriver for process automation. Running the following code will download the latest chromedriver and customize extensions optimized for RPA development:
  ```
 from checkCDriver import checkCDriver
-#checks and downloads if neeeded
+# Checks if Google Chrome Driver is found on machine. Downloads if needed.
 checkCDriver()
 ```
  - Install necessary packages by running the pip command with provided requirements.txt file:
