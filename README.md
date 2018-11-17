@@ -1,6 +1,7 @@
 # Autom8: Python for Robotic Process Automation
 
-Autom8 is a high level library for creating business oriented Robotic Process Automations using the Python programming language.
+Autom8 is a high level library for creating business oriented Robotic Process Automations using Python 2.7. It currently supports both Mac OS and Windows.
+
 
 Aimed at outperforming and outcosting closed sourced solutions such as Automation Anywhere or Blueprism, Autom8 consists of a central wrapper around the selenium webdriver exposing highly customized methods and functions through an efficient and easy to use API.
 
