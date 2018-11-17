@@ -8,8 +8,8 @@ The package's goal is to facilitate the RPA development process and bring Python
 
 Some conveniences  provided are:
  - Robust methods to navigate business applications frontends oriented towards efficiently managing large scale Automation endeavors
- - RPA logging locally hosted or integrated with google clouds Stackdriver
- - Integration with SAP scripting client
+ - RPA logging locally hosted or integrated with Google Cloud StackDriver (coming soon)
+ - Integration with SAP scripting client (coming soon) (Windows only)
  - Documentation and examples to create robust enterprise grade RPAs using python
  - Integration with major platforms for task specific business automaions
 
