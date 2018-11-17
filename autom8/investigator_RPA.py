@@ -1,8 +1,13 @@
 from autom8 import *
 from checkCDriver import CheckCDriver
+from os.path import join 
 from selenium.webdriver.common.keys import Keys
 
-CheckCDriver()
+try:
+    CheckCDriver()
+except Exception as e:
+    print(e)
+    print("Exception Handled!")
 
 topics = ["Donald Trump", "Brexit"]
 
@@ -67,7 +72,7 @@ def main(topics):
             os.mkdir(destination)
 
         for i, df in enumerate(topics_data):
-            df.to_csv(destination+r"\%s.csv"%topics[i], encoding="utf-8")
+            df.to_csv(join(destination,r"%s.csv"%topics[i]), encoding="utf-8")
         print("Robot Complete !")
 
     except Exception as e:
