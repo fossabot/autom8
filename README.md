@@ -1,5 +1,5 @@
-# autom8
-## Industrial Strength Robotics Process Automation
+#                                                    autom8
+Industrial Strength Robotics Process Automation
 ![alt text](https://github.com/dkatz23238/autom8/blob/master/img/autom8.jpg)
 # What is autom8?
 is a high level library for creating business oriented Robotic Process Automations using Python 2.7. It currently supports both Mac OS and Windows.
