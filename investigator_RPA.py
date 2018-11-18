@@ -1,5 +1,5 @@
-from autom8 import *
-from checkCDriver import CheckCDriver
+from autom8 import my_RPA
+from autom8.utils import CheckCDriver
 from os.path import join 
 from selenium.webdriver.common.keys import Keys
 

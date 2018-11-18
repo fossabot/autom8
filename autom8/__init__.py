@@ -9,13 +9,14 @@ import datetime
 import uuid
 import pymongo
 
+
 didnotinit = "Use .initialize_driver() to instantiate a webdriver session. "
 log_file_message = "Create and initialize logfile using .create_log_file(bot_name) before logging"
 
 class my_RPA(object):
 
     """
-    Creates an instance of RPA object:
+    Creates an instance of RPA object: 
 
     RPA objects can be used to create a virtual
     assistant that will cary out a series of event-based
