@@ -1,6 +1,7 @@
 # autom8: A Python RPA Library
 
-![alt text](https://github.com/dkatz23238/autom8/blob/master/img/autom8.jpg)
+![alt text](https://github.com/dkatz23238/autom8/blob/master/img/autom8.jpg)[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fdkatz23238%2Fautom8.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fdkatz23238%2Fautom8?ref=badge_shield)
+
 # What is autom8?
 is a high level library for creating business oriented Robotic Process Automations using Python 2.7. It currently supports both Mac OS and Windows.
 
@@ -64,6 +65,9 @@ Docs coming soon. Stay tuned or sign up for our mailing list *here*
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fdkatz23238%2Fautom8.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fdkatz23238%2Fautom8?ref=badge_large)
 
 ## Acknowledgments
 
